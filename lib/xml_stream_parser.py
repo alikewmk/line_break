@@ -16,19 +16,24 @@ class XMLStreamParser:
         Parse text in a specific tag
         '''
         with open(self.source_file) as input_file:
-            for line in input_file:
+            lines = iter(input_file)
+            for line in lines:
 
                 # TODO: check memory usage on server
                 # print resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
                 if re.search('<' + self.tag + '>', line):
-
+                    # avoid line breaks with no purpose
+                    text_line = line
+                    while not re.search('</' + self.tag + '>', text_line):
+                        text_line += (" " + lines.next())
+                    text_line = re.sub("\n+\s+", " ", text_line)
                     # parse code goes to here
                     regexp = re.compile('<' + self.tag + '>' + '(.*)' + '</' + self.tag + '>')
-                    text = regexp.search(line).groups(0)[0]
+                    text = regexp.search(text_line).groups(0)[0]
                     # TODO: parse text using CRF parser
                     new_text = "Hello World!"
-                    new_line = re.sub(text, new_text, line)
+                    new_line = re.sub(text, new_text, text_line)
                     yield new_line
                 else:
                     yield line
