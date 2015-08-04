@@ -23,7 +23,9 @@ test_files/*
 
 data/*
 
-models/*
+crf_files/*
+
+test.py
 
 m_*
 

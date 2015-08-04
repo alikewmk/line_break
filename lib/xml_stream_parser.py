@@ -1,5 +1,8 @@
 import resource
 import re
+from crf_formatter import word_features
+import CRFPP
+from cStringIO import StringIO
 
 class XMLStreamParser:
 
@@ -7,9 +10,42 @@ class XMLStreamParser:
     Parse specified element in a BIG xml file
     '''
 
-    def __init__(self, source_file, tag):
+    def __init__(self, source_file, model_file, tag):
         self.source_file = source_file
         self.tag = tag
+        self.tagger = CRFPP.Tagger("-m " + model_file + " -v 3 -n2")
+
+    def add_line_break(self, text):
+
+        # because write to a pseudo file is much faster
+        # here we use StringIO instead of string concatenation
+        new_text = StringIO()
+
+        # generate features for each word to predict if there is a line break after the word
+        # split text by blank
+        features = word_features(text).values
+        for row in features:
+            feature_string = " ".join([str(i) for i in row])
+            self.tagger.add(feature_string)
+
+        # generate prediction
+        self.tagger.parse()
+
+        # change text according to prediction
+        for idx in range(0, len(features)):
+            new_text.write(features[idx][0])
+            # If the word has new line after it, add new line
+            # else add whitespace after word
+            if self.tagger.y2(idx) == "NL":
+                new_text.write("\n")
+            else:
+                new_text.write(" ")
+
+        # clear parsed words
+        self.tagger.clear()
+
+        # to join string afterwards is more efficient in python
+        return new_text.getvalue()
 
     def parse(self):
         '''
@@ -28,12 +64,14 @@ class XMLStreamParser:
                     while not re.search('</' + self.tag + '>', text_line):
                         text_line += (" " + lines.next())
                     text_line = re.sub("\n+\s+", " ", text_line)
-                    # parse code goes to here
+
+                    # get the text that need to be parsed
                     regexp = re.compile('<' + self.tag + '>' + '(.*)' + '</' + self.tag + '>')
                     text = regexp.search(text_line).groups(0)[0]
-                    # TODO: parse text using CRF parser
-                    new_text = "Hello World!"
-                    new_line = re.sub(text, new_text, text_line)
+
+                    # add line break to target text
+                    new_text = self.add_line_break(text)
+                    new_line = text_line.replace(text, new_text, 1)
                     yield new_line
                 else:
                     yield line
@@ -46,13 +84,3 @@ class XMLStreamParser:
         with open(output_file, "w+", 0) as file:
             for line in self.parse():
                 file.write(line)
-
-# TEST
-if __name__ == '__main__':
-
-    parser = XMLStreamParser("../data/hno_notes.xml", "NOTE_TEXT")
-    parser.parse_and_write_to("result.xml")
-
-
-
-
