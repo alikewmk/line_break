@@ -37,7 +37,7 @@ class XMLStreamParser:
             # If the word has new line after it, add new line
             # else add whitespace after word
             if self.tagger.y2(idx) == "NL":
-                new_text.write("\n")
+                new_text.write("\n\n")
             else:
                 new_text.write(" ")
 
