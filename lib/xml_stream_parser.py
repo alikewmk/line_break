@@ -4,6 +4,8 @@ from crf_formatter import word_features
 import CRFPP
 from cStringIO import StringIO
 
+INVALID = '&#14;'
+
 class XMLStreamParser:
 
     '''
@@ -63,7 +65,8 @@ class XMLStreamParser:
                     text_line = line
                     while not re.search('</' + self.tag + '>', text_line):
                         text_line += (" " + lines.next())
-                    text_line = re.sub("\n+\s+", " ", text_line)
+
+                    text_line = self.remove_irrgular_char(text_line)
 
                     # get the text that need to be parsed
                     regexp = re.compile('<' + self.tag + '>' + '(.*)' + '</' + self.tag + '>')
@@ -75,6 +78,11 @@ class XMLStreamParser:
                     yield new_line
                 else:
                     yield line
+
+    def remove_irrgular_char(self, text_line):
+        text_line = re.sub("\n+\s+", " ", text_line)
+        text_line = re.sub(INVALID, "", text_line)
+        return text_line
 
     def parse_and_write_to(self, output_file):
         '''
