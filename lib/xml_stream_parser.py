@@ -28,7 +28,7 @@ class XMLStreamParser:
 
         # generate features for each word to predict if there is a line break after the word
         # split text by blank
-        features = word_features(text).values
+        features = word_features(text, gold_standard=False).values
         for row in features:
             feature_string = " ".join([str(i) for i in row])
             self.tagger.add(feature_string)
