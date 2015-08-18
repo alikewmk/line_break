@@ -4,14 +4,17 @@ from crf_formatter import word_features
 import CRFPP
 from cStringIO import StringIO
 
-INVALID = '&#14;'
+#### Define irregular char regexp constant
+# Abnormal line break
+ABNORMAL_LINE_BREAK = re.compile("\n+\s+")
+# Remove unused HTML coded char
+# According to The HTML Coded Character Set in http://www.w3.org/MarkUp/html-spec/html-spec_13.html
+INVALID_HTML_CODED_CHARACTERS = re.compile('&#(0[0-8]|1[1-2]|1[4-9]|2[0-9]|3[0-1]|12[7-9]|1[3-5][0-9]);')
 
 class XMLStreamParser:
-
     '''
     Parse specified element in a BIG xml file
     '''
-
     def __init__(self, source_file, model_file, tag):
         self.source_file = source_file
         self.tag = tag
@@ -80,8 +83,8 @@ class XMLStreamParser:
                     yield line
 
     def remove_irrgular_char(self, text_line):
-        text_line = re.sub("\n+\s+", " ", text_line)
-        text_line = re.sub(INVALID, "", text_line)
+        text_line = ABNORMAL_LINE_BREAK.sub(" ", text_line)
+        text_line = INVALID_HTML_CODED_CHARACTERS.sub("", text_line)
         return text_line
 
     def parse_and_write_to(self, output_file):
