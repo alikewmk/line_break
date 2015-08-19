@@ -21,7 +21,7 @@ class TemplateGenerator:
         '''
         return 'U{}:%x[{},{}]\n'.format(idx, y_axis, x_axis)
 
-    def generate_template(self, combination, gram_num):
+    def generate_template(self, combination, gram_num, folder=""):
         '''
         Generate a template with assigned feature types and gram number
         '''
@@ -32,7 +32,7 @@ class TemplateGenerator:
         feature_types = FEATURE_COMBINATIONS[combination]
 
         # generate file name from combination and gram_num
-        file_name = combination+"_"+"gram_num_"+str(gram_num)+"_template"
+        file_name = combination+"_"+"gram_num_"+str(gram_num)+".template"
 
         # init content string that should be written to template
         content = "# " + combination + " gram_num = " + str(gram_num) +"\n"
@@ -60,13 +60,13 @@ class TemplateGenerator:
                 content += self.temp_feat_str(current_idx, num, type_idx)
                 feature_idx += 1
 
-        with open(file_name, 'wb') as f:
+        with open(folder+file_name, 'wb') as f:
             f.write(content)
 
-    def batch_generate_template(self, combinations=list(FEATURE_COMBINATIONS.keys()), gram_range=list(range(2,7))):
+    def batch_generate_template(self, combinations=list(FEATURE_COMBINATIONS.keys()), gram_range=list(range(2,7)), folder=""):
         '''
         Batch generate template files for cross validation test
         '''
         for combination in combinations:
             for gram_num in gram_range:
-                self.generate_template(combination, gram_num)
+                self.generate_template(combination, gram_num, folder)
