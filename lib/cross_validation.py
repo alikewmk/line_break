@@ -146,7 +146,7 @@ def top_ten(r_type, result_file):
     result = pd.read_csv(result_file, sep=",")
     print "\nTop ten in descending order " + r_type
     output = StringIO()
-    result.groupby(["Template Name"]).mean().sort([r_type], ascending=False)[:10].to_csv(output)
+    result.groupby(["Template Name"]).mean().sort([r_type], ascending=False)[:10].to_csv(output, encoding='utf-8', sep=",")
     output.seek(0)
     pt = prettytable.from_csv(output)
     print pt
