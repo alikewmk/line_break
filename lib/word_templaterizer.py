@@ -51,7 +51,7 @@ class TemplateGenerator:
 
             # if not, add feature to template
             content += "# " + feature_type + "\n"
-            for num in range(-gram_num, gram_num+1):
+            for num in range(-gram_num, gram_num):
                 if feature_idx < 10:
                     current_idx = '0' + str(feature_idx)
                 else:
