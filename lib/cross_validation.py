@@ -33,12 +33,12 @@ def check_folder(folder):
     except:
         print folder, 'folder do not exists.'
 
-def ten_fold_data_preparation(source_data, data_folder):
+def ten_fold_data_preparation(source_data_folder, data_folder):
     '''
     Preparing ten fold training and testing data from a data source file
     '''
-    # check if data file exists
-    check_file(source_data)
+    # check if data files exists
+    check_folder(source_data_folder)
 
     # check if data folder exists, if not, create one
     create_folder(data_folder)
@@ -47,7 +47,7 @@ def ten_fold_data_preparation(source_data, data_folder):
         random.seed(i)
         train_data_file = data_folder + "training_data_fold_" + str(i+1)
         test_data_file  = data_folder + "testing_data_fold_" + str(i+1)
-        split_corpus(source_data, train_data_file, test_data_file)
+        split_corpus(source_data_folder, train_data_file, test_data_file)
 
 def generate_templates(templates_folder):
 
