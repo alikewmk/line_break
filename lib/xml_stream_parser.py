@@ -69,7 +69,7 @@ class XMLStreamParser:
                     while not re.search('</' + self.tag + '>', text_line):
                         text_line += (" " + lines.next())
 
-                    text_line = self.remove_irrgular_char(text_line)
+                    text_line = self.remove_irregular_char(text_line)
 
                     # get the text that need to be parsed
                     regexp = re.compile('<' + self.tag + '>' + '(.*)' + '</' + self.tag + '>')
@@ -82,7 +82,7 @@ class XMLStreamParser:
                 else:
                     yield line
 
-    def remove_irrgular_char(self, text_line):
+    def remove_irregular_char(self, text_line):
         text_line = ABNORMAL_LINE_BREAK.sub(" ", text_line)
         text_line = INVALID_HTML_CODED_CHARACTERS.sub("", text_line)
         return text_line
@@ -92,6 +92,6 @@ class XMLStreamParser:
         Write parsed element to output file
         Write to file without buffer
         '''
-        with open(output_file, "w+", 0) as file:
+        with open(output_file, "w+", 1) as file:
             for line in self.parse():
                 file.write(line)
