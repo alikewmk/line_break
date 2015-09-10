@@ -1,4 +1,4 @@
-from lib.xml_stream_parser import XMLStreamParser
+from xml_stream_parser import XMLStreamParser
 from Queue     import Queue as TQueue
 from threading import Thread
 from time import time
