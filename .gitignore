@@ -1,8 +1,3 @@
-
-.ipynb_checkpoints/*
-
-*.ipynb
-
 *.txt
 
 *.csv
@@ -11,22 +6,10 @@
 
 *.pyc
 
-output_files/*
-
-rearranged_trec_data/*
-
-formatted_output_data/*
-
-formatted_test_data/*
-
-test_files/*
-
-data/*
+.DS_Store
 
 crf_files/*
 
-test_scripts/*
-
-.DS_Store
+test/data/*
 
 lib/__pycache__/*
