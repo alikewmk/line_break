@@ -7,7 +7,7 @@ A module that gathering methods for
 from __future__ import division
 from word_templaterizer import TemplateGenerator
 from model_generator import generate_model
-from split_corpus import split_corpus
+from data_preprocessor import split_corpus
 from StringIO import StringIO
 import random
 import pandas as pd

@@ -1,8 +1,17 @@
-import resource
-import re
+'''
+This module in charge of parsing of
+1. BIG xml files
+   e.g.: parser = XMLStreamParser("BIG.xml", "model", "NOTE_TEXT")
+         parser.parse_and_write_to("output.txt")
+2. Small chunk of text (you can use method `add_line_break` in a hacking way to do that)
+   e.g.: parser = XMLStreamParser("", "model", "")
+         parser.add_line_break(text)
+'''
+
 from crf_formatter import word_features
-import CRFPP
 from cStringIO import StringIO
+import CRFPP
+import re
 
 #### Define irregular char regexp constant
 # Abnormal line break
@@ -60,9 +69,6 @@ class XMLStreamParser:
             lines = iter(input_file)
             for line in lines:
 
-                # TODO: check memory usage on server
-                # print resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-
                 if re.search('<' + self.tag + '>', line):
                     # avoid line breaks with no purpose
                     text_line = line
@@ -83,6 +89,10 @@ class XMLStreamParser:
                     yield line
 
     def remove_irregular_char(self, text_line):
+        '''
+        preprocessing each text line before parsing
+        remove char according to predefined Regexp rules
+        '''
         text_line = ABNORMAL_LINE_BREAK.sub(" ", text_line)
         text_line = INVALID_HTML_CODED_CHARACTERS.sub("", text_line)
         return text_line

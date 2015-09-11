@@ -1,9 +1,18 @@
+'''
+This module generates word based features in our training data
+It is a necessary part of data preprocessing
+'''
+
 from string import punctuation as punct
 from pandas import DataFrame, Series
 import pandas as pd
 import re
 
 def word_features(text, gold_standard=True):
+    '''
+    Generate word features strictly in order of WORD_FEAT_LIST below for each word in original training data
+    '''
+
     WORD_FEAT_LIST  = ["word", "isalpha", "allcaps", 'lowercase', 'titlecase', 'endsWithPunctuation', "startsWithPunctuation", "hasNumbers", "allNum", "new_line_value"]
 
     feature_list_of_features = list()

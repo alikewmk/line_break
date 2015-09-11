@@ -1,5 +1,7 @@
 """
 This script creates a shell script that defines a template file for crf++
+This is useless right now because it generates templates on char unit
+Just keep it in case of future use
 """
 
 #This should be kept updated with what is `crf_formatter.py`
