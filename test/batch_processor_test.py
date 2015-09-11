@@ -60,6 +60,7 @@ if __name__ == '__main__':
     '''
     Part 1 Normal Procedure
     '''
+    print("Part 1 Normal Procedure")
     ts = time()
     for file in os.listdir(original_folder):
         parse(original_folder, parsed_file_dir, file)
@@ -71,6 +72,7 @@ if __name__ == '__main__':
     Use this procedure if script is IO heavy
     This procedure is probably not useful in this line break task.
     '''
+    print("Part 1 Multi Threading Procedure")
     ts = time()
     # Create a queue to communicate with the worker threads
     queue = TQueue()
@@ -101,6 +103,7 @@ if __name__ == '__main__':
             if we have 18 process and 8 CPU, set number to 18/2=9 because  8 < 9  < 8*2
     Use this procedure if script is CPU heavy
     '''
+    print("Part 3 Multi Processing Procedure")
     ts = time()
     files = [f for f in os.listdir(original_folder) if f.endswith('.xml')]
     parse_process = partial(parse, original_folder, parsed_file_dir)

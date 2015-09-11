@@ -34,5 +34,10 @@ def parse_big_xml(model="crf_files/final_model"):
 
 if __name__ == '__main__':
 
+    print("Testing txt parsing")
     parse_txt_files()
+
+    print("Testing xml parsing")
     parse_big_xml()
+
+    print("Success!")
