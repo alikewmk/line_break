@@ -8,6 +8,7 @@ from crf_formatter import word_features
 from pandas import DataFrame, Series
 import pandas as pd
 from random import shuffle
+import codecs
 import time
 import re
 import os
@@ -32,7 +33,7 @@ def prepare_crf_data(dir, output_file, file_names=[]):
         files = os.listdir(dir)
 
     for file in files:
-        with open(dir + file) as f:
+        with codecs.open(dir + file, "r", "ISO-8859-1") as f:
             string = f.read()
             if file.endswith(".xml"):
                 text = xml_strip(string)
