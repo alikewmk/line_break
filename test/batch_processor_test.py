@@ -26,8 +26,8 @@ def create_folder(folder):
         os.mkdir(folder)
 
 def parse(input_dir, output_dir, file):
-  parser = XMLStreamParser(input_dir + file, "crf_files/final_model", "NOTE_TEXT")
-  parser.parse_and_write_to(output_dir + re.sub(".xml", "", file) + "_parsed.xml" )
+    parser = XMLStreamParser(input_dir + file, "crf_files/final_model", "NOTE_TEXT")
+    parser.parse_and_write_to(output_dir + re.sub(".xml", "", file) + "_parsed.xml" )
 
 class XmlParserWorker(Thread):
     def __init__(self, queue):
