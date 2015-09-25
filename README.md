@@ -34,15 +34,15 @@ All usages have examples under `test` directory
 
 - Ten Fold Cross Validation of CRF templates
 
+- Batch parsing BIG xml file
+
 *Under unit test*
 
 - Batch Process xml files
 
 - Line break test
 
-To run the python script on pearl server please use this command for now:
-
-`/home/users/wanme/.local/bin/python script_name`
+To run the python script on server, please follow the [installation guide](https://github.com/OHNLPIR/line_break/wiki/Installation)
 
 #### Bug Reports
 
