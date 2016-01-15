@@ -25,10 +25,10 @@ if __name__ == '__main__':
     generate_model("crf_files/final_template", "crf_files/train_features", "crf_files/final_model")
 
     # set the folder of origial data
-    original_folder = "/home/groups/pearl/wu_hno_notes_revised/"
+    original_folder = "/home/groups/pearl/notes_revised/"
 
     # set the folder for parsed files
-    parsed_file_dir = "/home/groups/pearl/wu_hno_notes_revised_parsed/"
+    parsed_file_dir = "/home/groups/pearl/notes_revised_parsed/"
 
     # Multi process xml files
     multi_processing(11, original_folder, parsed_file_dir)

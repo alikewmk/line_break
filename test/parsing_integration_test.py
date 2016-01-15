@@ -26,5 +26,5 @@ if __name__ == '__main__':
     # Generate target model
     generate_model("crf_files/final_template", "crf_files/train_features", "crf_files/final_model")
 
-    parser = XMLStreamParser("test/data/fake_hno_notes.xml", "crf_files/final_model", "NOTE_TEXT")
-    parser.parse_and_write_to("test/data/fake_hno_notes_parsed.xml")
+    parser = XMLStreamParser("test/data/fake_notes.xml", "crf_files/final_model", "NOTE_TEXT")
+    parser.parse_and_write_to("test/data/fake_notes_parsed.xml")

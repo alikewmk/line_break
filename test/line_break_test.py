@@ -29,8 +29,8 @@ def parse_txt_files():
                     wf.write(new_string)
 
 def parse_big_xml(model="crf_files/final_model"):
-    parser = XMLStreamParser("test/data/fake_hno_notes.xml", model, "NOTE_TEXT")
-    parser.parse_and_write_to("test/data/fake_hno_notes_parsed.xml")
+    parser = XMLStreamParser("test/data/fake_notes.xml", model, "NOTE_TEXT")
+    parser.parse_and_write_to("test/data/fake_notes_parsed.xml")
 
 if __name__ == '__main__':
 
