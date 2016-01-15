@@ -39,8 +39,6 @@ All usages have examples under `test` directory
 
 - Line break test
 
-To run the python script on server, please follow the [installation guide]()
-
 #### Bug Reports
 
 If encountered problems during usage, please fire an issue.
