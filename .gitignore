@@ -1,32 +1,13 @@
-<<<<<<< HEAD
-
 .ipynb_checkpoints/*
 
 *.ipynb
 
-=======
->>>>>>> wang_dev
 *.txt
 
 *.csv
 
 *.xml
 
-<<<<<<< HEAD
-output_files/*
-
-rearranged_trec_data/*
-
-formatted_output_data/*
-
-formatted_test_data/*
-
-test_files/*
-
-train_test_data/*
-
-m_*
-=======
 *.pyc
 
 .DS_Store
@@ -36,4 +17,3 @@ crf_files/*
 test/data/*
 
 lib/__pycache__/*
->>>>>>> wang_dev
